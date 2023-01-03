@@ -2,8 +2,9 @@
 
 Sound Dancer is a Python Tool to visualize your sound, including FFT on the left, and Wave on the right, both in 4 levels .
 
-# Install
+![demo](screenshot.png)
 
+# Install
 
 ```shell
 pip install -r requirements.txt
@@ -18,5 +19,3 @@ python SoundDancer.py
 ```
 
 Enjoy it !
-
-![demo](screenshot.png)
