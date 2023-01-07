@@ -28,18 +28,8 @@ win = pg.GraphicsLayoutWidget(show=True, title="Sound Dancer")
 win.resize(1440, 900)
 win.setWindowTitle('Sound Dancer')
 
-signals = {
-    1: []
-    , 2: []
-    , 4: []
-    , 8: []
-    , 16: []
-    , 32: []
-    , 64: []
-    , 128: []
-}
+signals = { 2**i : [] for i in range(8)}
 curves = {}
-# signals
 
 for i, k in enumerate(signals):
     plt = win.addPlot(title=f'Signals {k}'+(' FFT' if i%2==0 else ''))
@@ -63,7 +53,7 @@ for i, k in enumerate(signals):
 
 ptr = 0
 def update():
-    global curve, curve2, ptr, signals
+    global curves, ptr, signals
 
     for i, k in enumerate(signals):
         points = signals[k][-FRAMES:]
@@ -87,11 +77,9 @@ timer.start(1000 / FPS)
 #----- 音频处理
 
 pa = pyaudio.PyAudio()
-
-idx=0
-
 dt=np.dtype(np.int16)
 
+idx=0
 def callback(in_data, frame_count, time_info, status):
     global idx, signals
     data = in_data
@@ -122,12 +110,10 @@ def callback(in_data, frame_count, time_info, status):
     sigarr = sigarr.mean()
     signals[128].append(sigarr)
     
-    # print(f'In Data Len: {len(in_data)}, Frame: {frame_count}, Time: {datetime.datetime.fromtimestamp(time_info["current_time"])}, Status: {status}')
     if idx%FREQ==0:
         print(f'CHUNK[{idx}] = {data[0]:02X} {data[1]:02X} {data[2]:02X} ... {data[-3]:02X} {data[-2]:02X} {data[-1]:02X}, len={len(data)} {signal} {"|"*signal}')
-
     idx+=1
-    # print(idx)
+
     return (in_data, pyaudio.paContinue)
 
 if __name__ == '__main__':
