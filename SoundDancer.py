@@ -25,7 +25,7 @@ pg.setConfigOptions(antialias=True)
 app = pg.mkQApp("Sound Dancer")
 
 win = pg.GraphicsLayoutWidget(show=True, title="Sound Dancer")
-win.resize(2000, 1200)
+win.resize(1440, 900)
 win.setWindowTitle('Sound Dancer')
 
 signals = {

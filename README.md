@@ -7,9 +7,15 @@ Sound Dancer is a Python Tool to visualize your sound, including FFT on the left
 # Install
 
 ```shell
-# install c packages 
-brew install portaudio
-# this is for Mac, in other OS, you can use apt-get or yum to install
+# install c packages
+
+# for Anaconda, Miniconda
+conda install portaudio 
+
+# for Mac, you may also use
+# brew install portaudio
+
+# in other OS, you should change to: apt-get or yum
 
 # install python packages
 pip install -r requirements.txt
